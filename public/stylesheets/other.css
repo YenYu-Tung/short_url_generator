@@ -1,0 +1,25 @@
+.container-main{
+  margin: 80px;
+}
+
+.img{
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 150px;
+  height: 150px;
+}
+
+h1{
+  font-weight: bold;
+}
+
+.mb-3{
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+button{
+  width: 250px;
+}
+.btn-copy{
+  width: 150px;
+}
