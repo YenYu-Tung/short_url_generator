@@ -7,9 +7,11 @@ const app = express()
 app.engine('handlebars', exphbs({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
+app.use(express.urlencoded({ extended: true }))
 const ShortURL = require('./models/shorturl')
+const generate_shorturl = require('./generate_shorturl')
 
-app.use(express.urlencoded({extended: true}))
+
 app.use(express.static('public'))
 
 const db = mongoose.connection
@@ -24,8 +26,17 @@ db.once('open', () => {
 app.get('/', (req, res) => {
   res.render('index')
 })
-app.get('/newurl', (req, res) => {
-  res.render('success')
+
+app.post('/newurl', (req, res) => {
+  const originurl = req.body.url
+  console.log(originurl)
+  const url = generate_shorturl()
+  console.log(url)
+  res.render('success', {url})
+})
+
+app.get('', (req, res) => {
+  res.redirect()
 })
 
 app.listen(3000, () => {
