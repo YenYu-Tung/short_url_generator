@@ -27,18 +27,39 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.post('/newurl', (req, res) => {
-  const originurl = req.body.url
-  console.log(originurl)
+app.post('/', (req, res) => {
+  const originalurl = req.body.url
   const url = generate_shorturl()
-  console.log(url)
-  res.render('success', {url})
+  return ShortURL.findOne({originalURL: originalurl})
+    .lean()
+    .then((data) => {
+      if (!data) {
+        ShortURL.create({shortURL: url, originalURL: originalurl})
+        res.render('success', { url })
+        
+      }else {
+        url = data.shortURL
+        res.render('success', { url })
+      } 
+    })      
+    .catch(error => console.log(error))
 })
 
-app.get('', (req, res) => {
-  res.redirect()
+app.get('/:shorturl', (req, res) => {
+  const inputurl = req.params.shorturl
+  return ShortURL.findOne({shortURL: inputurl})
+    .lean()
+    .then((data) => {
+      if (!data) {
+        res.render('errorPage', {inputurl})
+      }else {
+        res.redirect(data.originalURL)
+      }
+    })
+    .catch(error => connsole.log(error))  
 })
 
 app.listen(3000, () => {
   console.log('App is listening on http://localhost:3000')
 })
+
