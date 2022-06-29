@@ -38,8 +38,7 @@ app.post('/', (req, res) => {
         res.render('success', { url })
         
       }else {
-        url = data.shortURL
-        res.render('success', { url })
+        res.render('success', { url: data.shortURL })
       } 
     })      
     .catch(error => console.log(error))
