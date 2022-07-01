@@ -16,6 +16,7 @@ const generate_shorturl = require('../../generate_shorturl')
 //新增原始URL
 router.post('/', (req, res) => {
   const originalurl = req.body.url
+  const urlhead = req.body.url.split(':')[0]
   const url = generate_shorturl()
   return ShortURL.findOne({ originalURL: originalurl })
     .lean()
@@ -23,9 +24,9 @@ router.post('/', (req, res) => {
       //判斷資料庫是否有輸入URL的資料, 無則新增,有則直接回傳
       if (!data) {
         ShortURL.create({ shortURL: url, originalURL: originalurl })
-        res.render('success', { url })
+        res.render('success', { url, urlhead})
       } else {
-        res.render('success', { url: data.shortURL })
+        res.render('success', { url: data.shortURL, urlhead })
       }
     })
     .catch(error => console.log(error))
