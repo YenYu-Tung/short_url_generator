@@ -1,7 +1,7 @@
 <div class="mb-3">  
   <h3 style="text-align: center;">Success! Please use this link:</h3>
   <a href="/{{url}}" class="newurl">
-    {{urlhead}}://short-url-generator/{{url}}   
+    {{urlhead}}://localhost:3000/{{url}}   
   </a>
 </div>
 <button type="submit" class="btn btn-copy btn-outline-primary" onclick="copyEvent()">Copy</button>
@@ -9,7 +9,7 @@
 <script>
   function copyEvent() {
     navigator.clipboard
-      .writeText("{{urlhead}}://short-url-generator/{{url}}")
+      .writeText("{{urlhead}}://localhost:3000/{{url}}")
       .then(() => alert('複製成功！'))
       .catch(error => console.log(error))
   }  

@@ -34,12 +34,14 @@ router.post('/', (req, res) => {
 //使用者使用產生的短網址則回傳原先輸入的網址
 router.get('/:shorturl', (req, res) => {
   const inputurl = req.params.shorturl
+  const urlhead = inputurl.split(':')[0]
+  const url = generate_shorturl()
   return ShortURL.findOne({ shortURL: inputurl })
     .lean()
     .then((data) => {
       //判斷資料庫是否有短網址資料
       if (!data) {
-        res.render('errorPage', { inputurl })
+        res.render('errorPage', { inputurl, urlhead })
       } else {
         res.redirect(data.originalURL)
       }
