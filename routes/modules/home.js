@@ -13,7 +13,7 @@ router.use(express.urlencoded({ extended: true }))
 //載入function
 const generate_shorturl = require('../../generate_shorturl')
 
-//新增原始URL
+//新增短URL
 router.post('/', (req, res) => {
   const originalurl = req.body.url
   const urlhead = req.body.url.split(':')[0]

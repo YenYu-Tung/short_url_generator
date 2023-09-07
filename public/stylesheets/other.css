@@ -1,5 +1,5 @@
 .container-main{
-  margin: 80px;
+  margin-top: 80px;
 }
 
 .img{
@@ -20,9 +20,9 @@ h3{
   padding-top: 20px;
   padding-bottom: 30px;
 }
-button{
+/* button{
   width: 250px;
-}
+} */
 .btn-copy{
   width: 150px;
 }
